@@ -1,0 +1,607 @@
+Mini Data-Analysis Deliverable 1
+================
+
+# Welcome to your (maybe) first-ever data analysis project!
+
+And hopefully the first of many. Let’s get started:
+
+1.  Install the [`datateachr`](https://github.com/UBC-MDS/datateachr)
+    package by typing the following into your **R terminal**:
+
+<!-- -->
+
+    install.packages("devtools")
+    devtools::install_github("UBC-MDS/datateachr")
+
+2.  Load the packages below.
+
+``` r
+library(datateachr)
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ## ✔ purrr     1.0.4     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+3.  Make a repository in the <https://github.com/stat545ubc-2024>
+    Organization. You can do this by following the steps found on canvas
+    in the entry called [MDA: Create a
+    repository](https://canvas.ubc.ca/courses/158528/pages/mda-create-a-repository).
+    One completed, your repository should automatically be listed as
+    part of the stat545ubc-2024 Organization.
+
+# Instructions
+
+## For Both Milestones
+
+- Each milestone has explicit tasks. Tasks that are more challenging
+  will often be allocated more points.
+
+- Each milestone will be also graded for reproducibility, cleanliness,
+  and coherence of the overall Github submission.
+
+- While the two milestones will be submitted as independent
+  deliverables, the analysis itself is a continuum - think of it as two
+  chapters to a story. Each chapter, or in this case, portion of your
+  analysis, should be easily followed through by someone unfamiliar with
+  the content.
+  [Here](https://swcarpentry.github.io/r-novice-inflammation/06-best-practices-R.html)
+  is a good resource for what constitutes “good code”. Learning good
+  coding practices early in your career will save you hassle later on!
+
+- The milestones will be equally weighted.
+
+## For Milestone 1
+
+**To complete this milestone**, edit [this very `.Rmd`
+file](https://raw.githubusercontent.com/UBC-STAT/stat545.stat.ubc.ca/master/content/mini-project/mini-project-1.Rmd)
+directly. Fill in the sections that are tagged with
+`<!--- start your work below --->`.
+
+**To submit this milestone**, make sure to knit this `.Rmd` file to an
+`.md` file by changing the YAML output settings from
+`output: html_document` to `output: github_document`. Commit and push
+all of your work to the mini-analysis GitHub repository you made
+earlier, and tag a release on GitHub. Then, submit a link to your tagged
+release on canvas.
+
+**Points**: This milestone is worth 36 points: 30 for your analysis, and
+6 for overall reproducibility, cleanliness, and coherence of the Github
+submission.
+
+# Learning Objectives
+
+By the end of this milestone, you should:
+
+- Become familiar with your dataset of choosing
+- Select 4 questions that you would like to answer with your data
+- Generate a reproducible and clear report using R Markdown
+- Become familiar with manipulating and summarizing your data in tibbles
+  using `dplyr`, with a research question in mind.
+
+# Task 1: Choose your favorite dataset
+
+The `datateachr` package by Hayley Boyce and Jordan Bourak currently
+composed of 7 semi-tidy datasets for educational purposes. Here is a
+brief description of each dataset:
+
+- *apt_buildings*: Acquired courtesy of The City of Toronto’s Open Data
+  Portal. It currently has 3455 rows and 37 columns.
+
+- *building_permits*: Acquired courtesy of The City of Vancouver’s Open
+  Data Portal. It currently has 20680 rows and 14 columns.
+
+- *cancer_sample*: Acquired courtesy of UCI Machine Learning Repository.
+  It currently has 569 rows and 32 columns.
+
+- *flow_sample*: Acquired courtesy of The Government of Canada’s
+  Historical Hydrometric Database. It currently has 218 rows and 7
+  columns.
+
+- *parking_meters*: Acquired courtesy of The City of Vancouver’s Open
+  Data Portal. It currently has 10032 rows and 22 columns.
+
+- *steam_games*: Acquired courtesy of Kaggle. It currently has 40833
+  rows and 21 columns.
+
+- *vancouver_trees*: Acquired courtesy of The City of Vancouver’s Open
+  Data Portal. It currently has 146611 rows and 20 columns.
+
+**Things to keep in mind**
+
+- We hope that this project will serve as practice for carrying our your
+  own *independent* data analysis. Remember to comment your code, be
+  explicit about what you are doing, and write notes in this markdown
+  document when you feel that context is required. As you advance in the
+  project, prompts and hints to do this will be diminished - it’ll be up
+  to you!
+
+- Before choosing a dataset, you should always keep in mind **your
+  goal**, or in other ways, *what you wish to achieve with this data*.
+  This mini data-analysis project focuses on *data wrangling*,
+  *tidying*, and *visualization*. In short, it’s a way for you to get
+  your feet wet with exploring data on your own.
+
+And that is exactly the first thing that you will do!
+
+1.1 **(1 point)** Out of the 7 datasets available in the `datateachr`
+package, choose **4** that appeal to you based on their description.
+Write your choices below:
+
+**Note**: We encourage you to use the ones in the `datateachr` package,
+but if you have a dataset that you’d really like to use, you can include
+it here. But, please check with a member of the teaching team to see
+whether the dataset is of appropriate complexity. Also, include a
+**brief** description of the dataset here to help the teaching team
+understand your data.
+
+<!-------------------------- Start your work below ---------------------------->
+
+1: TAD_data_combined  
+2: apt_buildings  
+3: parking_meters  
+4: vancouver_trees
+
+### Description of TAD_data_combined
+
+This dataset (which I am using for my Master’s thesis) consists of tag
+data measuring depth for nine Belugas over a period of three months in
+Western Hudson Bay. The data is summarized into 14 depth bins every 6
+hours.
+
+<!----------------------------------------------------------------------------->
+
+1.2 **(6 points)** One way to narrowing down your selection is to
+*explore* the datasets. Use your knowledge of dplyr to find out at least
+*3* attributes about each of these datasets (an attribute is something
+such as number of rows, variables, class type…). The goal here is to
+have an idea of *what the data looks like*.
+
+*Hint:* This is one of those times when you should think about the
+cleanliness of your analysis. I added a single code chunk for you below,
+but do you want to use more than one? Would you like to write more
+comments outside of the code chunk?
+
+<!-------------------------- Start your work below ---------------------------->
+
+## Data set 1 - TAD_data_combined
+
+``` r
+### Data set 1 ###
+TAD_data_combined <- tibble(read.csv("TAD_data_combined.csv")) %>% group_by(Ptt)
+TAD_num_rows <- nrow(TAD_data_combined)
+TAD_num_belugas <- n_groups(TAD_data_combined)
+TAD_num_cols <- ncol(TAD_data_combined)
+
+cat("---Data set 1 summary---\n")
+```
+
+    ## ---Data set 1 summary---
+
+``` r
+cat("There are", TAD_num_rows, "observations in the dataset.\n")
+```
+
+    ## There are 3437 observations in the dataset.
+
+``` r
+cat("There are", TAD_num_cols, "columns in the dataset.\n")
+```
+
+    ## There are 23 columns in the dataset.
+
+``` r
+cat("There are", TAD_num_belugas, "individuals in the dataset.")
+```
+
+    ## There are 9 individuals in the dataset.
+
+## Data set 2 - apt_buildings
+
+``` r
+### Data set 2 ###
+apt_num_rows <- nrow(apt_buildings)
+apt_num_NA <- sum(is.na(apt_buildings))
+apt_num_vars <- ncol(apt_buildings) - 1 # subtract one to account for the ID column
+
+cat("---Data set 2 summary---\n")
+```
+
+    ## ---Data set 2 summary---
+
+``` r
+cat("There are", apt_num_rows, "observations in the dataset.\n")
+```
+
+    ## There are 3455 observations in the dataset.
+
+``` r
+cat("There are", apt_num_NA, "missing data points in the dataset.\n")
+```
+
+    ## There are 6286 missing data points in the dataset.
+
+``` r
+cat("There are", apt_num_vars, "variables in the dataset.\n")
+```
+
+    ## There are 36 variables in the dataset.
+
+## Data set 3 - parking_meters
+
+``` r
+### Data set 3 ###
+parking_num_rows <- nrow(parking_meters)
+parking_num_meter_heads <- n_distinct(parking_meters$meter_head)
+parking_num_dollar_columns <- sum(sapply(parking_meters, function(x) TRUE %in% grepl("\\$", x)))
+
+
+cat("---Data set 3 summary---\n")
+```
+
+    ## ---Data set 3 summary---
+
+``` r
+cat("There are", parking_num_rows, "rows in the dataset.\n")
+```
+
+    ## There are 10032 rows in the dataset.
+
+``` r
+cat("There are", parking_num_meter_heads, "types of meter heads in the dataset.\n")
+```
+
+    ## There are 7 types of meter heads in the dataset.
+
+``` r
+cat("There are", parking_num_dollar_columns, "columns with monetary data in the dataset.\n")
+```
+
+    ## There are 7 columns with monetary data in the dataset.
+
+## Data set 4 - vancouver_trees
+
+``` r
+### Data set 4 ###
+trees_num_rows <- nrow(vancouver_trees)
+trees_num_classes <- n_distinct((sapply(vancouver_trees, class)))
+trees_num_numeric_columns <- sum(sapply(vancouver_trees, class)=="character")
+
+cat("---Data set 4 summary---\n")
+```
+
+    ## ---Data set 4 summary---
+
+``` r
+cat("There are", trees_num_rows, "trees in the dataset.\n")
+```
+
+    ## There are 146611 trees in the dataset.
+
+``` r
+cat("There are", trees_num_classes, "classes of data used in the columns of the dataset.\n")
+```
+
+    ## There are 3 classes of data used in the columns of the dataset.
+
+``` r
+cat("There are", trees_num_numeric_columns, "columns with character data in the dataset.\n")
+```
+
+    ## There are 12 columns with character data in the dataset.
+
+<!----------------------------------------------------------------------------->
+
+1.3 **(1 point)** Now that you’ve explored the 4 datasets that you were
+initially most interested in, let’s narrow it down to 1. What lead you
+to choose this one? Briefly explain your choice below.
+
+<!-------------------------- Start your work below ---------------------------->
+
+I would like to use my TAD_data_combined dataset since I’m interested in
+using this assignment to set up the data for my Master’s thesis project
+and do some preliminary analysis.
+
+<!----------------------------------------------------------------------------->
+
+1.4 **(2 points)** Time for a final decision! Going back to the
+beginning, it’s important to have an *end goal* in mind. For example, if
+I had chosen the `titanic` dataset for my project, I might’ve wanted to
+explore the relationship between survival and other variables. Try to
+think of 1 research question that you would want to answer with your
+dataset. Note it down below.
+
+<!-------------------------- Start your work below ---------------------------->
+
+The research question I’m interested in answering with this data set is:
+
+> Do Belugas spend more time at the surface at different times of
+> day/year?
+
+<!----------------------------------------------------------------------------->
+
+# Important note
+
+Read Tasks 2 and 3 *fully* before starting to complete either of them.
+Probably also a good point to grab a coffee to get ready for the fun
+part!
+
+This project is semi-guided, but meant to be *independent*. For this
+reason, you will complete tasks 2 and 3 below (under the **START HERE**
+mark) as if you were writing your own exploratory data analysis report,
+and this guidance never existed! Feel free to add a brief introduction
+section to your project, format the document with markdown syntax as you
+deem appropriate, and structure the analysis as you deem appropriate. If
+you feel lost, you can find a sample data analysis
+[here](https://www.kaggle.com/headsortails/tidy-titarnic) to have a
+better idea. However, bear in mind that it is **just an example** and
+you will not be required to have that level of complexity in your
+project.
+
+# Task 2: Exploring your dataset
+
+If we rewind and go back to the learning objectives, you’ll see that by
+the end of this deliverable, you should have formulated *4* research
+questions about your data that you may want to answer during your
+project. However, it may be handy to do some more exploration on your
+dataset of choice before creating these questions - by looking at the
+data, you may get more ideas. **Before you start this task, read all
+instructions carefully until you reach START HERE under Task 3**.
+
+2.1 **(12 points)** Complete *4 out of the following 8 exercises* to
+dive deeper into your data. All datasets are different and therefore,
+not all of these tasks may make sense for your data - which is why you
+should only answer *4*.
+
+Make sure that you’re using dplyr and ggplot2 rather than base R for
+this task. Outside of this project, you may find that you prefer using
+base R functions for certain tasks, and that’s just fine! But part of
+this project is for you to practice the tools we learned in class, which
+is dplyr and ggplot2.
+
+1.  Plot the distribution of a numeric variable.
+2.  Create a new variable based on other variables in your data (only if
+    it makes sense)
+3.  Investigate how many missing values there are per variable. Can you
+    find a way to plot this?
+4.  Explore the relationship between 2 variables in a plot.
+5.  Filter observations in your data according to your own criteria.
+    Think of what you’d like to explore - again, if this was the
+    `titanic` dataset, I may want to narrow my search down to passengers
+    born in a particular year…
+6.  Use a boxplot to look at the frequency of different observations
+    within a single variable. You can do this for more than one variable
+    if you wish!
+7.  Make a new tibble with a subset of your data, with variables and
+    observations that you are interested in exploring.
+8.  Use a density plot to explore any of your variables (that are
+    suitable for this type of plot).
+
+2.2 **(4 points)** For each of the 4 exercises that you complete,
+provide a *brief explanation* of why you chose that exercise in relation
+to your data (in other words, why does it make sense to do that?), and
+sufficient comments for a reader to understand your reasoning and code.
+
+<!-------------------------- Start your work below ---------------------------->
+
+## 2. Create a new variable based on other variables in your data
+
+Here I am creating a variable for time of day (that is separate from the
+date variable). I think it’s likely that the whales’ behaviour will
+change based on time of day since their prey will vary their depth based
+on the light level. Creating a time column will allow me to look for how
+time of day changes what depth the whales are more likely to be found at
+(which in turn can be incorporated into aerial survey data analysis).
+
+``` r
+# Create a column for the time and move it to be next to the date
+# The time is simply the decimal portion of the date so we can retrieve it using Date %% 1
+TAD_data_combined <- TAD_data_combined %>% mutate(Time = Date %% 1) %>% relocate(Time, .after = Date)
+head(TAD_data_combined)
+```
+
+    ## # A tibble: 6 × 24
+    ## # Groups:   Ptt [1]
+    ##       X     ID    Ptt HistType   Date  Time Time.Offset Count NumBins   Sum
+    ##   <int>  <int>  <int> <chr>     <dbl> <dbl>       <int> <int>   <int> <int>
+    ## 1     1 229299 128155 TAD      42200. 0.958          28    97       9   100
+    ## 2     2 229300 128155 TAD      42200  0              28    44       9   100
+    ## 3     3 229301 128155 TAD      42200. 0.25           28    33       9   100
+    ## 4     4 229302 128155 TAD      42200. 0.5            28    25       9   100
+    ## 5     5 229303 128155 TAD      42201. 0.75           28    28       9   100
+    ## 6     6 229304 128155 TAD      42201  0              28    15       9   100
+    ## # ℹ 14 more variables: X0.1.m <int>, X1.2.m <dbl>, X2.4.m <dbl>, X4.5.m <dbl>,
+    ## #   X5.6.m <dbl>, X6.10.m <dbl>, X10.20.m <int>, X20.50.m <dbl>,
+    ## #   X50.100.m <dbl>, X100.200.m <dbl>, X200.300.m <lgl>, X300.500.m <lgl>,
+    ## #   X500.700.m <lgl>, X.700.m <lgl>
+
+## 7. Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring
+
+Here I am getting rid of columns I don’t need, removing the data from
+one of the whales, and removing observations at irregular time
+intervals. I’m removing one of the whales because its tag data shows
+that it didn’t spend any time at the surface (which is impossible), so
+there was likely a malfunction. I’m removing observations at irregular
+time periods because the tags were only programmed to save data at 6
+hour intervals, so these data points are likely due to malfunctions.
+
+``` r
+# remove extraneous columns
+TAD_data <- TAD_data_combined %>% select(-X, -ID, -HistType, - Time.Offset, -Count)
+
+# remove individual 128156 since the data looks off
+TAD_data <- TAD_data %>% filter(Ptt != 128156)
+
+# Remove observations at irregular time intervals
+TAD_data <- TAD_data %>% filter(Time %in% c(0, 0.25, 0.5, 0.75)) %>% mutate(Time = as.factor(Time))
+
+head(TAD_data)
+```
+
+    ## # A tibble: 6 × 19
+    ## # Groups:   Ptt [1]
+    ##      Ptt   Date Time  NumBins   Sum X0.1.m X1.2.m X2.4.m X4.5.m X5.6.m X6.10.m
+    ##    <int>  <dbl> <fct>   <int> <int>  <int>  <dbl>  <dbl>  <dbl>  <dbl>   <dbl>
+    ## 1 128155 42200  0           9   100     17   45.4   34.1    2.8    0         0
+    ## 2 128155 42200. 0.25        9   100     17   41.8   27.9   12.5    0.4       0
+    ## 3 128155 42200. 0.5         9   100     24   32.4   36.7    6.5    0.2       0
+    ## 4 128155 42201. 0.75        9   100     39   44.8   15      0.6    0         0
+    ## 5 128155 42201  0           9   100     40   39.7   19.5    0.2    0         0
+    ## 6 128155 42201. 0.25        9   100     36   23.9   39.4    0      0         0
+    ## # ℹ 8 more variables: X10.20.m <int>, X20.50.m <dbl>, X50.100.m <dbl>,
+    ## #   X100.200.m <dbl>, X200.300.m <lgl>, X300.500.m <lgl>, X500.700.m <lgl>,
+    ## #   X.700.m <lgl>
+
+## 1. Plot the distribution of a numeric variable
+
+Here I am plotting the distribution of the proportion of time spent at
+the surface. I first create separate plots for each whale, and then
+create a plot with the whales combined (minus the one with the
+malfunctioning tag).
+
+The reason I’m interested in time spent at the surface is that this
+determines whether the whale is detected by aerial surveys (which can
+only see what’s happening near the surface). Estimating time spent at
+the surface is useful in getting a population estimate from aerial
+survey data. Plotting this distribution informs me what probability
+distribution I should use to model this variable, this will help me
+determine if there are any differences between whales or time of
+day/year. From the look of the plot, a Beta distribution would be a good
+choice here.
+
+``` r
+top_bin_histogram_split <- TAD_data_combined %>% ggplot(aes(x=X0.1.m)) + 
+  geom_histogram() + facet_wrap(vars(Ptt)) + labs(x = "Time spent at 0-1 m every 6 hours", title="Distribution of time at 0-1 m for each individual")
+print(top_bin_histogram_split)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+![](mini-project-1_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+``` r
+top_bin_histogram <- TAD_data %>% ggplot(aes(x=X0.1.m)) + 
+  geom_histogram() + labs(x = "Time spent at 0-1 m every 6 hours", title="Overall distribution of time at 0-1 m without individual #128156")
+
+print(top_bin_histogram)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+![](mini-project-1_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
+
+## 4. Explore the relationship between 2 variables in a plot
+
+Here I’m looking at the relationship between time of day and the
+proportion of time spent at the surface. Since the aerial surveys occur
+around mid-day, I would like to know if the whales are more or less
+likely to be at the surface at this time of day relative to other times
+of day. I used a box plot since it shows the distribution of the
+variable.
+
+``` r
+time_vs_top_bin <- TAD_data %>% 
+  ggplot(aes(Time, X0.1.m)) + geom_boxplot() + labs(y="Proportion of time at 0-1 m in depth", x = "Time of day (24 hours divided into 4 segments)", title = "Proportion of time at the surface vs time of day")
+
+print(time_vs_top_bin)
+```
+
+![](mini-project-1_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+<!----------------------------------------------------------------------------->
+
+# Task 3: Choose research questions
+
+**(4 points)** So far, you have chosen a dataset and gotten familiar
+with it through exploring the data. You have also brainstormed one
+research question that interested you (Task 1.4). Now it’s time to pick
+4 research questions that you would like to explore in Milestone 2!
+Write the 4 questions and any additional comments below.
+
+<!--- *****START HERE***** --->
+
+1.  Does the average proportion of time spent at different depths differ
+    whale to whale?
+2.  What is the relationship between the proportion of time spent at the
+    surface and the time of day?
+3.  What is the relationship between the proportion of time spent at the
+    surface and the time of year?
+4.  Does the proportion of time spent at deeper depths change with the
+    time of day?
+
+<!----------------------------->
+
+# Overall reproducibility/Cleanliness/Coherence Checklist
+
+## Coherence (0.5 points)
+
+The document should read sensibly from top to bottom, with no major
+continuity errors. An example of a major continuity error is having a
+data set listed for Task 3 that is not part of one of the data sets
+listed in Task 1.
+
+## Error-free code (3 points)
+
+For full marks, all code in the document should run without error. 1
+point deduction if most code runs without error, and 2 points deduction
+if more than 50% of the code throws an error.
+
+## Main README (1 point)
+
+There should be a file named `README.md` at the top level of your
+repository. Its contents should automatically appear when you visit the
+repository on GitHub.
+
+Minimum contents of the README file:
+
+- In a sentence or two, explains what this repository is, so that
+  future-you or someone else stumbling on your repository can be
+  oriented to the repository.
+- In a sentence or two (or more??), briefly explains how to engage with
+  the repository. You can assume the person reading knows the material
+  from STAT 545A. Basically, if a visitor to your repository wants to
+  explore your project, what should they know?
+
+Once you get in the habit of making README files, and seeing more README
+files in other projects, you’ll wonder how you ever got by without them!
+They are tremendously helpful.
+
+## Output (1 point)
+
+All output is readable, recent and relevant:
+
+- All Rmd files have been `knit`ted to their output md files.
+- All knitted md files are viewable without errors on Github. Examples
+  of errors: Missing plots, “Sorry about that, but we can’t show files
+  that are this big right now” messages, error messages from broken R
+  code
+- All of these output files are up-to-date – that is, they haven’t
+  fallen behind after the source (Rmd) files have been updated.
+- There should be no relic output files. For example, if you were
+  knitting an Rmd to html, but then changed the output to be only a
+  markdown file, then the html file is a relic and should be deleted.
+
+(0.5 point deduction if any of the above criteria are not met. 1 point
+deduction if most or all of the above criteria are not met.)
+
+Our recommendation: right before submission, delete all output files,
+and re-knit each milestone’s Rmd file, so that everything is up to date
+and relevant. Then, after your final commit and push to Github, CHECK on
+Github to make sure that everything looks the way you intended!
+
+## Tagged release (0.5 points)
+
+You’ve tagged a release for Milestone 1.
+
+### Attribution
+
+Thanks to Icíar Fernández Boyano for mostly putting this together, and
+Vincenzo Coia for launching.

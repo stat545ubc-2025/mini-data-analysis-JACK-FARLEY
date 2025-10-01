@@ -1,0 +1,25 @@
+
+# Mini Data Analysis Project
+
+This repository is used for my STAT 545A data analysis project showing
+the basics of data analysis in R.
+
+## Description
+
+In this project I’m analyzing a dataset of tag data measuring depth for
+nine Belugas over a period of three months in Western Hudson Bay. The
+goal of this project is to perform a preliminary data analysis that will
+inform the modelling decisions I make for my Master’s thesis on
+estimating the Beluga population in Hudson Bay.
+
+The data I’m using is found in
+[TAD_data_combined.csv](TAD_data_combined.csv). The first stages of the
+data analysis can be found in [mini-project-1.md](mini-project-1.md)
+
+## Acknowledgments
+
+The data comes courtesy of [Marianne
+Marcoux](https://profils-profiles.science.gc.ca/en/profile/marianne-marcoux)
+of the Department of Fisheries and Oceans. The tags used were [SPLASH
+tags](https://wildlifecomputers.com/our-tags/splash-archiving-tags/)
+made by Wildlife Computers and deployed in the summer of 2015.
