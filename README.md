@@ -14,7 +14,7 @@ estimating the Beluga population in Hudson Bay.
 
 The data I’m using is found in
 [TAD_data_combined.csv](TAD_data_combined.csv). The first stages of the
-data analysis can be found in [mini-project-1.md](mini-project-1.md)
+data analysis can be found in [mini-project-1.md](mini-project-1.md).
 
 ## Acknowledgments
 
