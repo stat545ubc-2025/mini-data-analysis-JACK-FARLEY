@@ -13,7 +13,7 @@ This repository is used for my STAT 545A data analysis project showing the basic
 
 In this project I'm analyzing a dataset of tag data measuring depth for nine Belugas over a period of three months in Western Hudson Bay. The goal of this project is to perform a preliminary data analysis that will inform the modelling decisions I make for my Master's thesis on estimating the Beluga population in Hudson Bay.
 
-The data I'm using is found in [TAD_data_combined.csv](data/TAD_data_combined.csv). The first stages of the data analysis can be found in [mini-project-1.md](milestone-1/mini-project-1.md).
+The data I'm using is found in [TAD_data_combined.csv](data/TAD_data_combined.csv). The first stages of the data analysis can be found in [mini-project-1.md](milestone-1/mini-project-1.md). The final data analysis can be found in [mini-project-2.md](milestone-2/mini-project-2.md).
 
 ## Acknowledgments
 

@@ -13,8 +13,11 @@ inform the modelling decisions I make for my Master’s thesis on
 estimating the Beluga population in Hudson Bay.
 
 The data I’m using is found in
-[TAD_data_combined.csv](TAD_data_combined.csv). The first stages of the
-data analysis can be found in [mini-project-1.md](mini-project-1.md).
+[TAD_data_combined.csv](data/TAD_data_combined.csv). The first stages of
+the data analysis can be found in
+[mini-project-1.md](milestone-1/mini-project-1.md). The final data
+analysis can be found in
+[mini-project-2.md](milestone-2/mini-project-2.md).
 
 ## Acknowledgments
 
