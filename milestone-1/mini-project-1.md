@@ -22,14 +22,20 @@ library(tidyverse)
 
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-    ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.2
+    ## ✔ ggplot2   4.0.0     ✔ tibble    3.3.0
     ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
     ## ✔ purrr     1.0.4     
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library(here)
+```
+
+    ## here() starts at /Users/jackfarley/Documents/R and Python Projects/STAT 545/mini-project
 
 3.  Make a repository in the <https://github.com/stat545ubc-2024>
     Organization. You can do this by following the steps found on canvas
@@ -176,7 +182,7 @@ comments outside of the code chunk?
 
 ``` r
 ### Data set 1 ###
-TAD_data_combined <- tibble(read.csv("TAD_data_combined.csv")) %>% group_by(Ptt)
+TAD_data_combined <- tibble(read.csv(here("data", "TAD_data_combined.csv"))) %>% group_by(Ptt)
 TAD_num_rows <- nrow(TAD_data_combined)
 TAD_num_belugas <- n_groups(TAD_data_combined)
 TAD_num_cols <- ncol(TAD_data_combined)
@@ -483,7 +489,7 @@ top_bin_histogram_split <- TAD_data_combined %>% ggplot(aes(x=X0.1.m)) +
 print(top_bin_histogram_split)
 ```
 
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+    ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
@@ -494,7 +500,7 @@ top_bin_histogram <- TAD_data %>% ggplot(aes(x=X0.1.m)) +
 print(top_bin_histogram)
 ```
 
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+    ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
 
